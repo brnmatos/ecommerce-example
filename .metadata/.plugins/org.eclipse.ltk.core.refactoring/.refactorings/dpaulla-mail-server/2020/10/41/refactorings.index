@@ -1,0 +1,24 @@
+1601782338511	Rename package 'br.com.crb.mercury.mail.server'
+1601782349503	Rename package 'br.com.crb.mercury.mail.server.config'
+1601782417760	Rename package 'br.com.crb.mercury.mail.server.controller'
+1601782462579	Rename package 'br.com.crb.mercury.mail.server.controller.impl'
+1601782533474	Rename package 'br.com.crb.mercury.mail.server.service'
+1601782552730	Rename package 'br.com.crb.mercury.mail.server.utils'
+1601782674752	Rename type 'MercuryMailServerApplication'
+1601838428971	Rename compilation unit 'AlertsController.java'
+1601838512690	Rename type 'CadastroWapper'
+1601839226645	Delete element
+1601839233880	Delete element
+1601839381613	Delete element
+1601839517343	Delete element
+1601897611241	Copy file
+1601904020825	Copy compilation unit
+1601904041055	Copy compilation unit
+1601904091046	Copy compilation units
+1601907187600	Copy compilation units
+1601907307378	Delete elements
+1601910485652	Delete element
+1602078234787	Move source folder
+1602084505074	Rename type 'AlertsController'
+1602119514092	Move folder
+1602119525640	Move folder

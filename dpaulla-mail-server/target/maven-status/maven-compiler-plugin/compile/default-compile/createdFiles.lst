@@ -1,0 +1,15 @@
+br\com\crb\mercury\mail\server\service\MailgunMailService.class
+br\com\crb\mercury\mail\server\utils\MailWrapper.class
+br\com\crb\mercury\mail\server\service\MailSenderService.class
+br\com\crb\mercury\mail\server\config\BeansConfig.class
+br\com\crb\mercury\mail\server\MercuryMailServerApplication.class
+br\com\crb\mercury\mail\server\service\MailgunMailService$1.class
+br\com\crb\mercury\mail\server\utils\TemplateHelper.class
+br\com\crb\mercury\mail\server\config\WebSecurityConfig.class
+br\com\crb\mercury\mail\server\utils\MailMessageUtil.class
+br\com\crb\mercury\mail\server\controller\impl\AntennaController.class
+br\com\crb\mercury\mail\server\utils\MailWrapper$MailWrapperBuilder.class
+br\com\crb\mercury\mail\server\utils\TemplateHelper$ApplicationRepo.class
+br\com\crb\mercury\mail\server\controller\impl\AlertsHourController.class
+br\com\crb\mercury\mail\server\controller\impl\AlertsController.class
+br\com\crb\mercury\mail\server\controller\MainController.class

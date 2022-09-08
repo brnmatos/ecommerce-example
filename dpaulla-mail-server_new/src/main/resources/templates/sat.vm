@@ -1,0 +1,25 @@
+Prezado(a),
+
+Conforme solicitado na CIR.DOP.0022/17, segue programação para restabelecimento da operacionalidade de Sensor de Tráfego em falha.
+
+Equipamento: SAT$sat KM$km Rodovia $rodovia | #foreach($equipamento in $listdevices ) $equipamento #end
+ 
+RA: $ra
+Início da falha: $data
+
+A previsão para correção dessa falha é de até 5 dias.
+
+Para maiores informações favor entrar em contato com Alisson no telefone (11) 4894-8538 ou através do e-mail manutencao@rotadasbandeiras.com.br.
+
+
+
+Atenciosamente,
+Equipe de Manutenção e Tecnologia
+Concessionária Rota das Bandeiras
+
+
+
+
+
+
+

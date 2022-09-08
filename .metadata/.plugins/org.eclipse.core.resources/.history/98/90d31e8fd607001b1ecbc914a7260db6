@@ -1,0 +1,18 @@
+server.port:8181
+spring.application.name=dpaulla-mail-server
+
+#mercury
+app.mailgun.username.api=postmaster@sandbox27d43c4a599b4ca393d58580742482a5.mailgun.org
+app.mailgun.key=86bafda177026160240a9b80284cace6-0d2e38f7-35dcba18
+app.mailgun.url=https://api.mailgun.net/v3/dpaulla-cosmeticos.com.br
+#email details
+
+#contatos
+app.mail.contact.address=matos.brn@gmail.com
+app.mail.platform.contact.from=matos.brn@gmail.com
+
+#Subjects
+app.mail.cadastro.subject=Bem vindo ao DPaulla-Cosmeticos
+
+#Templates
+app.mail.cadastro.template=cadastro.vm

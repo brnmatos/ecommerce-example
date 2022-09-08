@@ -1,0 +1,81 @@
+package br.com.dpaulla.mail.server.utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import br.com.dpaulla.mail.server.model.User;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+public class MailMessageUtil {
+	
+	//CONTATOS
+	@Value("${app.mail.contact.address}")
+	private String crbContact;
+	
+	@Value("${app.mail.contact.manutencao.address}")
+	private String crbContactManutencao;
+	
+	@Value("${app.mail.platform.contact.from}")
+	private String from;
+
+	//SAT
+	@Value("${app.mail.sat.template}")
+	private String alertsTemplate;
+	
+	private String mailSubject = "Rota das Bandeiras - Sensoriamento de Tráfego - Falha na Operação - ";
+	
+	//ANTENNA
+	@Value("${app.mail.antenna.subject}")
+	private String antennaMailSubject;
+	
+	@Value("${app.mail.antenna.template}")
+	private String antennaTemplate;
+	
+	@Value("${app.mail.cadastro.template}")
+	private String cadastroTemplate;
+	
+	private String dateTime;
+	private static String codSat;
+	private static String ra;
+	private static String km;
+	private static String rodovia;
+	
+	public MailWrapper buildCadastroMessage(User user) {
+		log.info("Building E-mail message... {}", mailSubject);
+		MailWrapper mailWrapper = cadastroWrapper(user);
+		Map<String, Object> aditional = new HashMap<>();
+		List<String> listOfLinks = new ArrayList<String>();
+		
+		//aditional.put("VARIAVEL NO TEMPLATE", "VALOR QUE DEVE ASSUMIR");
+		aditional.put("data", dateTime);
+		aditional.put("email", crbContact);
+		aditional.put("sat", codSat);
+		aditional.put("km", km);
+		aditional.put("rodovia", rodovia);
+		aditional.put("listdevices", listOfLinks);
+		aditional.put("ra", ra);
+		log.info("Aditional parameters message -> {}", aditional);
+		String nameSat = "SAT" + codSat;
+		mailWrapper.setSubject(mailSubject + nameSat);
+		mailWrapper.setTemplate(alertsTemplate);
+		mailWrapper.setAditional(aditional);
+		
+		log.info("Add parameters. \n\tfrom: {} \n\temail: {} \n\tbcc: {} \n\tsubject: {} \n\ttemplate: {} \n\taditional: {} \n\tmailWrapper: {}", 
+				from, user, mailSubject, alertsTemplate, aditional, mailWrapper);
+		return mailWrapper;
+	}
+	
+	private MailWrapper cadastroWrapper(User user) {
+		log.info("default Wrapper...{}", user);
+		MailWrapper mailWrapper = new MailWrapper();
+		mailWrapper.setFrom(from);
+		mailWrapper.setTo(user.getUsername());
+		mailWrapper.setBcc(crbContact);
+		return mailWrapper;
+	}
+}

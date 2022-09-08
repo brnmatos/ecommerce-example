@@ -1,0 +1,27 @@
+Prezado(a),
+
+Segue status dos SATS e LAÇOS que estiveram com contagem zerada nas últimas 4 horas.
+Esse e-mail é enviado automáticamente de hora em hora.
+Se atentar caso o mesmo SAT/LAÇO apareça nesse e-mail por mais de 4 vezes, pois é necessário alerta a ARTESP, 
+oque também deve ser feito automáticamente e está sujeito a falhas.
+
+Equipamentos: 
+#foreach($equipamento in $listdevices ) 
+$equipamento 
+#end
+ 
+
+Para maiores informações favor entrar em contato com Alisson no telefone (11) 4894-8538 ou através do e-mail manutencao@rotadasbandeiras.com.br.
+
+
+
+Atenciosamente,
+Equipe de Manutenção e Tecnologia
+Concessionária Rota das Bandeiras
+
+
+
+
+
+
+

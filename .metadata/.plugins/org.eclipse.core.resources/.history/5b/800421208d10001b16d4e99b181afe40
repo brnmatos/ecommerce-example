@@ -1,0 +1,114 @@
+package br.com.dpaulla.mail.server.controller;
+
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.async.DeferredResult;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import br.com.dpaulla.mail.server.service.MailSenderServiceImpl;
+import br.com.dpaulla.mail.server.utils.MailWrapper;
+import br.com.dpaulla.model.User;
+import br.com.dpaulla.model.response.MailResponse;
+import br.com.dpaulla.model.wrapper.CadastroWrapper;
+import lombok.extern.slf4j.Slf4j;
+
+@RestController
+@RequestMapping(value = "/teste")
+@Slf4j
+public class TesteController {
+
+	private final RestTemplate client = new RestTemplate();
+
+	@Autowired
+	MailSenderServiceImpl mailgunMailService;
+
+	@Value("${app.mailgun.key}")
+	private String password;
+
+	@Value("${app.mailgun.url}")
+	private String url;
+
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<MailResponse> cadastroMail(@RequestBody CadastroWrapper cadastro) throws Exception{
+		ResponseEntity<MailResponse> response = new ResponseEntity<MailResponse>(null);
+		log.info("Received request. User -> {}", cadastro);
+		
+		ResponseEntity<String> response2 = mailgunMailService.send(cadastro, null);
+		//executor.submit(sendMail(response, cadastro));
+		log.info("EXECUTOU TODA A PARADA NO CONTROLLER DE CADASTRO E RETORNOU O RESPONSE {}", response2.getBody());
+		return response;	
+	}
+
+	@RequestMapping(value = { "/cadastro" }, method = RequestMethod.GET)
+	public ResponseEntity<String> cadastroEmail(@RequestBody CadastroWrapper cadastroWrapper) {
+		HttpHeaders httpHeaders = createHeaders(password);
+		httpHeaders.add("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("from", "Relac <teste@dpaulla-cosmeticos.com.br>");
+		map.add("to", "bruninhomatos95@hotmail.com");
+		log.info("PARA E-MAIL: {}", cadastroWrapper.getUserCadastrado().getUsername());
+		map.add("subject", "Seja Bem Vindo ! DPaulla-Cosmeticos");
+		map.add("text", "teste");
+		ResponseEntity<String> response = (ResponseEntity<String>) client.exchange(url, HttpMethod.POST, new HttpEntity<>(map, httpHeaders), String.class);
+		log.info("AGORA O TESTE BODY, STATUS, GERAL: {}, {}, {}", response.getBody(), response.getStatusCode(), response);
+		
+		return response;
+	}
+
+	private HttpHeaders createHeaders(String password) {
+		return new HttpHeaders() {
+			private static final long serialVersionUID = 1L;
+
+			{
+				String auth = "api" + ":" + password;
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "Basic " + new String(encodedAuth);
+				set("Authorization", authHeader);
+			}
+		};
+	}
+	
+	
+	public MailWrapper buildCadastroMessage(User user) {
+		log.info("Building E-mail message... {}", mailSubject);
+		MailWrapper mailWrapper = cadastroWrapper(user);
+		Map<String, Object> aditional = new HashMap<>();
+		List<String> listOfLinks = new ArrayList<String>();
+		//aditional.put("VARIAVEL NO TEMPLATE", "VALOR QUE DEVE ASSUMIR");
+		aditional.put("data", dateTime);
+		aditional.put("email", user.getUsername());
+		aditional.put("km", km);
+		aditional.put("rodovia", rodovia);
+		aditional.put("listdevices", listOfLinks);
+		aditional.put("ra", ra);
+		log.info("Aditional parameters message -> {}", aditional);
+		mailWrapper.setSubject(mailSubject);
+		mailWrapper.setTemplate(cadastroTemplate);
+		mailWrapper.setAditional(aditional);
+		
+		log.info("Add parameters. \n\tfrom: {} \n\temail: {} \n\tbcc: {} \n\tsubject: {} \n\ttemplate: {} \n\taditional: {} \n\tmailWrapper: {}", from, user, mailSubject, cadastroTemplate, aditional, mailWrapper);
+		return mailWrapper;
+	}
+
+}

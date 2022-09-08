@@ -1,0 +1,81 @@
+package br.com.dpaulla.mail.server.service;
+
+import java.nio.charset.Charset;
+
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
+import br.com.crb.mercury.mail.server.utils.MailWrapper;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class MailgunMailService implements MailSenderService{
+
+	private final RestTemplate client = new RestTemplate();
+	
+	@Value("${app.mailgun.key}")
+	private String password;
+
+	@Value("${app.mailgun.url}")
+	private String url;
+
+	@Override
+	public ResponseEntity<String> send(String from, String to, String subject, Object mappedBody, String template)
+			throws Exception {
+		log.info("Send email '{}' to: {}", subject, to);
+		HttpHeaders httpHeaders = createHeaders(password);
+		httpHeaders.add("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("from", from);
+		map.add("to", to);
+		map.add("subject", subject);
+		map.add("text", "teste");
+		log.info("PARTIDA.... : {}, {}, {}", mappedBody, template, map);
+		ResponseEntity<String> response = (ResponseEntity<String>) client.exchange(url, HttpMethod.POST, new HttpEntity<>(map, httpHeaders), String.class);
+		log.info("received : {}", response);
+		return response;
+	}
+
+	private HttpHeaders createHeaders(String password) {
+		return new HttpHeaders() {
+			private static final long serialVersionUID = 1L;
+
+			{
+				String auth = "api" + ":" + password;
+				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+				String authHeader = "Basic " + new String(encodedAuth);
+				set("Authorization", authHeader);
+			}
+		};
+	}
+
+	@Override
+	public ResponseEntity<String> send(MailWrapper mailWrapper, Object mappedBody) throws Exception {
+		log.info("ENVIA email '{}' to: {}", mailWrapper.getSubject(), mailWrapper.getTo());
+
+		HttpHeaders httpHeaders = createHeaders(password);
+		httpHeaders.add("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+		map.add("from", mailWrapper.getFrom());
+		map.add("to", mailWrapper.getTo());
+		map.add("subject", mailWrapper.getSubject());
+		map.add("bcc", mailWrapper.getBcc());
+		map.add("text", mailWrapper.getMail());
+		log.info("PARTIDA DO TRAVAMENTO.... : {} and map: {}", mailWrapper, map);
+		ResponseEntity<String> response = client.exchange(url, HttpMethod.POST, new HttpEntity<>(map, httpHeaders), String.class);
+		log.info("RECEBE response mailgunservice '{}'", response);
+		return response;
+	}
+	
+}

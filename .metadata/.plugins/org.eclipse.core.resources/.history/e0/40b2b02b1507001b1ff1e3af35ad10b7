@@ -1,0 +1,18 @@
+package br.com.dpaulla.mail.server.model;
+
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
+public @Data class Role {
+
+	private Long roleId;
+	private String name;
+	private Set<User> users;
+
+}

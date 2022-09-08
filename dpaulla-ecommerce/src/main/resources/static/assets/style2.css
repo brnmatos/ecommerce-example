@@ -1,0 +1,524 @@
+@charset "ISO-8859-1";
+
+/* ***********PERSONALIZAÇÕES DE MONITOR GRANDE, 2560 PX************ */
+@media (max-width: 2560px){
+
+	/* **************************MENU PRINCIPAL***************************************/
+.section-menu-principal{
+	min-height: 80px;
+	width:100%;
+}
+.section-menu-principal .brand-name{
+	color: #741b75;
+	margin: 0;
+}
+
+.section-menu-principal .hamburger span,.section-menu-principal .close-sidebar span{
+	background: #e708a7;
+}
+
+.section-menu-principal .nav-dropdown .dropdown-menu .dropdown-item{
+	font-weight: 400;
+	width: 100%;
+}
+
+.section-menu-principal .navbar-brand{
+	flex-shrink: 0;
+	margin-right: 0;
+	padding: 0;
+}
+
+.section-menu-principal .navbar-dropdown{
+		padding: 0 0;
+}
+
+.navbar-menu-principal{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 5;
+	min-height: 160px;
+	background: #ffffff;
+}
+
+.navbar-brand{
+	display: flex;
+	align-items: center;
+	word-break: break-word;
+	z-index: 1;
+}
+
+.navbar-logo{
+	height: 100px;
+	width: 150px;
+	margin: 0 0.8rem 0 0;
+}
+
+.menu-sem-categoria{
+	display: flex;
+	height:30px;  /*TAMANHO GERAL DO HEIGHT DO MENU CATEGORIA */
+	width: 100%;	
+	z-index: 2;
+	background-color: #741b75; /*COR GERAL DO MENU CATEGORIA */
+}
+
+.navbar-brand{
+	display: flex;
+	align-items: center;
+	word-break: break-word;
+	z-index: 1;
+}
+.navbar-logo{
+	margin: 0 0.8rem 0 0;
+}
+.navbar-nav{
+	list-style-type: none;
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 0;
+	min-width: 10rem;
+}
+	
+/* MENU DE CATEGORIAS - DEFAULT EM TODOS AS TELAS COM EXCEÇÃO DE LOGIN*/
+
+.menuCategoriasPrincipal {
+  cursor: pointer;
+  display: grid;
+  position:absolute;
+  width:100%;
+  min-height:80px;
+  grid-template-columns:100%;
+  grid-template-rows: 50% 50%;
+  word-break: break-word;
+  padding:0 0 0 0;
+  border:0;
+  background-color:#000000;
+  
+}
+
+.menuCategoriasPrincipal-grupoitem1{
+  cursor: pointer;
+  display: grid;
+  position:relative;
+  width:100%;
+  height:100%;
+  grid-template-columns:20% 20% 20% 20% 20%;
+  grid-template-rows: 100%;
+  word-break: break-word;
+  padding:0 0 0 0;
+  border:0;
+  background-color: #741b75; /* COR DE ONDE ESTÃO OS QUADRADINHOS*/
+}
+
+.menuCategoriasPrincipal-grupoitem2{
+  cursor: pointer;
+  display: grid;
+  position:relative;
+  width:100%;
+  height:100%;
+  grid-template-columns:100%;
+  grid-template-rows: 100%;
+  word-break: break-word;
+  padding:0 0 0 0;
+  border:0;
+  background-color: #ffffff; /* COR DE ONDE ESTÃO OS QUADRADINHOS*/
+}
+
+.menuCategoriasPrincipal-item{
+	display:flex;
+	align-items: center;
+    justify-content: center;
+	width:100%;
+	height:100%;
+	background-color: #741b75; /* COR DE ONDE ESTÃO OS QUADRADINHOS*/
+	text-align: center;
+	color: white;
+	font-size: 18px;
+	
+}
+.menuCategoriasPrincipal-item-oculto{
+	display:flex;
+	width:100%;
+	height:100%;
+	background-color:#d6d6d6;
+}
+
+
+/* ***********LAYOUT DE MENUS OCULTOS - MENU SUPERIOR*********** */
+
+.divMenu-sub-item1{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu-sub-item2{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu-sub-item3{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu-sub-item4{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu-sub-item5{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu-sub-item6{
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divMenu1 {
+  cursor: pointer;
+  display: grid;
+  position:relative;	
+  visibility:hidden;	
+  justify-content: center;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  background-color:#f6f6f6;
+  min-width:100%;
+  height:100%; 
+  align-items: center;
+  justify-content: center;
+}
+
+.menuCategoriasPrincipal-text{
+	text-align: center;
+	color: white;
+	font-size: 18px;
+}
+	
+div.menuCategoriasPrincipal-item:hover,div.menuCategoriasPrincipal-item:focus{
+	background-color:pink;
+}			
+	
+a.menuCategoriasPrincipal-text:hover,a.menuCategoriasPrincipal-text:focus{
+	color:white;
+} 
+	
+.nav-item-menu{
+		word-break: break-all;
+		background-color:#741b75; /*#741b75;    TRANSFORMA O MENU DE LOGIN E O MENU DE CATEGORIA EM PRETO */	
+		text-align: center;
+}
+
+/**********LAYOUT FOOTER GERAL*****************/
+.sectionFooterGeral{
+  	position: absolute;
+  	top: 105%;
+	background-color: #232323;
+    width: 100%;
+	z-index: 1;
+	}
+	
+.sectionFooterGeral img{
+	object-fit: contain;
+	}
+.sectionFooterGeral .item,.sectionFooterGeral .group-title .sectionFooterGeral P{
+	color: #efefef;
+	}
+
+
+/*******************TELA INICIAL, CONTENDO O SLIDER DE APRESENTAÇÃO***************************************/
+/*--------------SLIDER--------------*/
+.cid-s2AS0Vifug{
+	z-index: 1;
+  	position: absolute;
+  	top: 5%;
+   	width: 100%;
+	height: 100%;
+	background-color:#d6d6d6;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+  height:60%;
+  /* transform: translate(-50%, -50%); */ 
+}
+
+.carousel-img{
+	padding-top: 5px;
+	padding-bottom: 10px;
+	width: 1000px;
+	height: 650px; 
+	margin:auto;	
+}
+
+.myDot{
+	  position: absolute;
+	  top: 125%;
+  	  left: 50%;  
+	  transform: translate(-50%, -50%); 
+}
+
+/* Caption text */
+.text-slider {
+  color: #000000;
+  font-size: 40px;
+  padding: 8px 12px;
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);   
+  top:130%;
+  left:50%;
+}
+
+
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 2.5s;
+  animation-name: fade;
+  animation-duration: 2.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+
+/* --------------  LAYOUT FOOTER PRODUTOS-----------*/
+.footerprodutos{
+  	position: absolute;
+  	top: 100%;
+	background-color: #232323;
+    width: 100%;
+	z-index: 1;
+	}
+	
+.footerprodutos img{
+	object-fit: contain;
+	}
+.footerprodutos .item,.footerprodutos .group-title .footerprodutos P{
+	color: #efefef;
+	}
+
+
+/*****************TELA DE MARCAS - VISUALIZAÇÃO DE PRODUTOS************************ */
+
+.listaItensVisualizacao{
+	z-index: 1;
+  	position: absolute;
+  	top: 18%;
+   	width: 100%;
+	height: 100%;
+	background-color:#d6d6d6;
+}
+	
+
+.listaItensVisualizacao .title{
+	padding-bottom: 1rem;
+	}
+
+.listaItensVisualizacao .item-wrapper{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.listaItensVisualizacao .item-btn,.cid-s2ACGNbIxN .item-box-btn{
+	margin: 0;
+	}
+.listaItensVisualizacao .item-box{
+	justify-content: center;
+	position: relative;
+	width: 100%;
+	background: #efefef;
+	overflow: auto;
+}
+
+.listaItensVisualizacao .item-box-img amp-img{
+	height: auto;
+	}
+.listaItensVisualizacao .item-box-wrapper{
+	background-color: #efefef;
+}
+	
+.listaItensVisualizacao amp-img:after{
+	content: "";
+	pointer-events: none;
+	transition: 0.4s;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	background-color: rgba(78,162,227,0.5);
+}
+.listaItensVisualizacao amp-img:hover:after{
+	opacity: 1;
+}
+.listaItensVisualizacao 
+.icon-wrap{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	opacity: 0;
+	transition: 0.4s;
+	height: 2rem;
+	width: 2rem;
+	z-index: 2;
+}
+.listaItensVisualizacao 
+.icon-wrap span{
+	color: #ffffff;
+	font-size: 2rem;
+}
+.listaItensVisualizacao amp-img:hover 
+.icon-wrap{
+	opacity: 1;
+}
+.listaItensVisualizacao .item{
+	cursor: pointer;
+}
+.listaItensVisualizacao 
+.mbr-section-title,
+.listaItensVisualizacao 
+.mbr-section-subtitle{
+	text-align: center;
+}
+
+.navbar-filtro{
+	display: flex;
+	align-items: left;
+	word-break: break-word;
+	z-index: 1;
+	position: relative;
+	width: 200px;
+	height: 400px;
+	left:20px;
+	}
+
+
+.div-produtos {
+	left:10%;
+	position: relative;
+	width:100%;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: 200px auto auto;
+	grid-gap: 3px;
+  	text-align: center;
+  	padding: 3px 0;
+  	font-size: 15px;
+}	
+
+.container-produtos{
+	position: relative;
+	width: 70%;
+	height: 100%;
+	left:15%;
+	top:-450px;
+	word-wrap: break-word;
+	}
+
+.myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px;  /*Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+.myUL {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.myUL li a {
+  border: 1px solid #ddd; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6; /* Grey background color */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  color: black; /* Add a black text color */
+  display: block; /* Make it into a block element to fill the whole list */
+}
+
+.myUL li a:hover:not(.header) {
+  background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+.myUL div{
+	position: relative;
+	display: grid;
+	grid-template-columns: 80% 20%;
+	grid-template-rows: auto;
+}
+
+
+
+.div-layout-produtos {
+	left:10%;
+	position: relative;
+	width:100%;
+	height:100%;
+	display: grid;
+	grid-template-columns: 20% 20% 20% 20%;
+	grid-template-rows: 200px 200px 200px 200px;
+	grid-gap: 55px 20px;
+	background-color: #fafafa;
+}
+
+.divprodutosimagem{
+	alt: image;
+	layout: responsive;
+	width: 647; 
+	height:394; 
+	lightbox:gallery2-j;
+}
+	
+
+	
+	
+}
+		
+/* TERMINO DAS MINHAS PERSONALIZAÃ‡Ã•ES */

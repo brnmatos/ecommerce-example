@@ -1,0 +1,74 @@
+/*package br.com.crb.mercury.mail.server.utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import br.com.crb.mercury.api.model.AlertHourSatsModel;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+public class AlertsMailMessageUtil {
+	
+	//CONTATOS
+	@Value("${app.mail.contact.manutencao.address}")
+	private String crbContact;
+	
+	@Value("${app.mail.platform.contact.from}")
+	private String from;
+	
+	private String artespContact = "aqmendonca@rotadasbandeiras.com.br";
+	
+	private String alertsMailSubject = "Alerta - Sensoriamento de Tráfego - Status Hora em Hora ";
+	
+	@Value("${app.mail.alerts.template}")
+	private String alertsTemplate;
+	
+	private static String codSat;
+	private static String ra;
+	
+	public MailWrapper buildAlertsHourMessage(List<AlertHourSatsModel> listOfLinksAndSats) {
+		log.info("Building E-mail message... {}", alertsMailSubject);
+		MailWrapper mailWrapper = alertsHourWrapper(listOfLinksAndSats);
+		Map<String, Object> aditional = new HashMap<>();
+		List<String> listOfLinks = new ArrayList<String>();
+		
+		listOfLinksAndSats.stream().forEach(action -> {
+			int intCodSat = action.getNUM_ESTACAO(); 
+			codSat = String.valueOf(intCodSat);
+			ra = action.getNOME_ESTACAO();
+			String link = "SAT: " + action.getNUM_ESTACAO() + " - " + action.getNOME_LACO();
+			listOfLinks.add(link);
+		});
+		//aditional.put("VARIAVEL NO TEMPLATE", "VALOR QUE DEVE ASSUMIR");
+		aditional.put("email", crbContact);
+		aditional.put("sat", codSat);
+		aditional.put("listdevices", listOfLinks);
+		log.info("Aditional parameters message -> {}", aditional);
+		String nameSat = "SAT" + codSat;
+		mailWrapper.setSubject(alertsMailSubject + nameSat);
+		mailWrapper.setTemplate(alertsTemplate);
+		mailWrapper.setAditional(aditional);
+		
+		log.info("Add parameters. \n\tfrom: {} \n\temail: {} \n\tbcc: {} \n\tsubject: {} \n\ttemplate: {} \n\taditional: {} \n\tmailWrapper: {}", 
+				from, listOfLinksAndSats, alertsMailSubject, alertsTemplate, aditional, mailWrapper);
+		return mailWrapper;
+	}
+	
+	
+	private MailWrapper alertsHourWrapper(List<AlertHourSatsModel> listOfLinksAndSats) {
+		log.info("default Wrapper...{}", listOfLinksAndSats);
+		MailWrapper mailWrapper = new MailWrapper();
+		mailWrapper.setFrom(from);
+		mailWrapper.setTo(artespContact);
+		mailWrapper.setBcc(crbContact);
+		return mailWrapper;
+	}
+
+}
+*/

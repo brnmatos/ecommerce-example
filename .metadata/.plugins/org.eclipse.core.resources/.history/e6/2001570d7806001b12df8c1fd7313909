@@ -1,0 +1,21 @@
+server.port:8181
+spring.application.name=mercury-mail-server
+
+#mercury
+app.mailgun.username.api=postmaster@rotadasbandeiras.com.br
+app.mailgun.key=key-5ef5a2bd1bfcc3936e495cdf1b8dd546
+app.mailgun.url=https://api.mailgun.net/v3/rotadasbandeiras.com.br/messages
+#email details
+
+#contatos
+app.mail.contact.address=crbsistemas@rotadasbandeiras.com.br;brunofelipe@rotadasbandeiras.com.br;evertoncatanio@rotadasbandeiras.com.br;valmirjunior@rotadasbandeiras.com.br;marianavasconcelos@rotadasbandeiras.com.br
+app.mail.contact.manutencao.address=ti@rotadasbandeiras.com.br;manutencao@rotadasbandeiras.com.br; crbsistemas@rotadasbandeiras.com.br; fernando@sakugava.com;automacao@rotadasbandeiras.com.br
+app.mail.platform.contact.from=Concessionaria Rota das Bandeiras manutencao@rotadasbandeiras.com.br
+
+#Subjects
+app.mail.antenna.subject=Tags 915MHz
+
+#Templates
+app.mail.sat.template=sat.vm
+app.mail.antenna.template=antenna.vm
+app.mail.alerts.template=alertshour.vm
