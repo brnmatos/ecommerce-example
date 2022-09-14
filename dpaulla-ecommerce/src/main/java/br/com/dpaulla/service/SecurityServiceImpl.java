@@ -11,10 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import br.com.dpaulla.model.User;
 import br.com.dpaulla.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class SecurityServiceImpl implements SecurityService {
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -25,7 +23,7 @@ public class SecurityServiceImpl implements SecurityService {
 	@Autowired
 	private UserRepository userRepository;
 
-	private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
 	@Override
 	public String findLoggedInUsername() {
@@ -52,7 +50,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 		if (usernamePasswordAuthenticationToken.isAuthenticated()) {
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-			logger.info(String.format("Auto login %s successfully!", username));
+			log.info(String.format("Auto login %s successfully!", username));
 			log.info("Security Service: autoLogin {}", username);
 		}
 	}

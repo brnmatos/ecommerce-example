@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import br.com.dpaulla.model.User;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Component
 public class CadastroMailMessageUtil {
 
+	private static Logger log = LoggerFactory.getLogger(CadastroMailMessageUtil.class);
 	
 	//CONTATOS
 	@Value("${app.mail.contact.address}")

@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import br.com.dpaulla.mail.client.impl.MailClientImpl;
 import br.com.dpaulla.mail.server.utils.MailWrapper;
 import br.com.dpaulla.model.wrapper.CadastroWrapper;
 

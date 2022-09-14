@@ -1,15 +1,17 @@
 package br.com.dpaulla.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.async.DeferredResult;
 import br.com.dpaulla.model.response.MailResponse;
 import br.com.dpaulla.service.MailgunMailService;
 import br.com.dpaulla.utils.MailWrapper;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public abstract class MainController<T> {
+	
+	private static Logger log = LoggerFactory.getLogger(MainController.class);
 	
 	private MailgunMailService mailgunMailService;
 	

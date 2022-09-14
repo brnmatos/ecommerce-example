@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.com.dpaulla.component.calcShippingCorreiosAPI;
 import br.com.dpaulla.component.UserValidator;
 import br.com.dpaulla.component.Util;
 import br.com.dpaulla.mail.client.MailClient;
@@ -31,7 +30,6 @@ import br.com.dpaulla.model.response.MailResponse;
 import br.com.dpaulla.model.wrapper.CadastroWrapper;
 import br.com.dpaulla.service.SecurityService;
 import br.com.dpaulla.service.UserService;
-import lombok.extern.slf4j.Slf4j;
 
 @Controller
 public class UserController {

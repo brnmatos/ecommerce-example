@@ -3,6 +3,8 @@ package br.com.dpaulla.service;
 import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,14 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
 import br.com.dpaulla.utils.MailWrapper;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class MailgunMailService implements MailSenderService{
 
+	private static Logger log = LoggerFactory.getLogger(MailgunMailService.class);
+	
 	private final RestTemplate client = new RestTemplate();
 	
 	@Value("${app.mailgun.key}")

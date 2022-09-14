@@ -35,4 +35,18 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+	@Override
+	public boolean checkEmpty() {
+		if (userRepository.count() < 1) {
+			return true;
+		}else {return false;}
+	}
+
+	@Override
+	public void saveWithRoles(User user) {
+    	user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+	}
+	
 }

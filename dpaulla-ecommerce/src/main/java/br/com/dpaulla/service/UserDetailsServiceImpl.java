@@ -2,6 +2,8 @@ package br.com.dpaulla.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,13 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.dpaulla.model.Role;
 import br.com.dpaulla.model.User;
 import br.com.dpaulla.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
-@Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
+	
+	private static Logger log = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
 	@Override
 	@Transactional(readOnly = true)

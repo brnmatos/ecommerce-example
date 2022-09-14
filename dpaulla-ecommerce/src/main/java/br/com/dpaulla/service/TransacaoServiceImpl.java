@@ -27,7 +27,7 @@ public class TransacaoServiceImpl implements TransacaoService {
 	public List<order> findAllByUsuarioId(User user) {
 		List<order> listTransacao = new ArrayList<order>();
 		transacaoRepository.findAll().stream().forEach(action -> {
-			if (action.getTransacaoUsuarioId() == user.getUserId()) {
+			if (action.getUserId() == user.getUserId()) {
 				listTransacao.add(action);
 			}
 		});		

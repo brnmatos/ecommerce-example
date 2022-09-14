@@ -91,10 +91,10 @@ public class PagSeguroAPIClientImpl implements PagSeguroAPIClient {
 		map.add("currency", currency); //OK
 		map.add("extraAmount", extraAmount);  //
 		map.add("notificationURL", notificationURL); //
-		map.add("reference", String.valueOf(transacao.getTransacaoId())); //
+		map.add("reference", String.valueOf(transacao.getId())); //
 		map.add("senderName", transacao.getTransacaoCompradorNome()); //OK
 		map.add("senderEmail", "matos.brn@sandbox.pagseguro.com.br");//transacao.getTransacaoCompradorEmail());
-		map.add("senderHash", transacao.getTransacaoHashCode()); //
+		map.add("senderHash", transacao.getHashCode()); //
 		map.add("shippingAddressStreet", transacao.getTransacaoCobrancaEndereco()); //
 		map.add("shippingAddressNumber", transacao.getTransacaoCobrancaNumero());//
 		map.add("shippingAddressComplement", transacao.getTransacaoCobrancaEnderecoComplemento()); //
@@ -115,11 +115,11 @@ public class PagSeguroAPIClientImpl implements PagSeguroAPIClient {
 			map.add("senderAreaCode", transacao.getTransacaoCompradorTelefoneDDD());
 			map.add("senderPhone", transacao.getTransacaoCompradorTelefone());
 			map.add("shippingAddressRequired", shippingAddressRequired);   //
-			map.add("shippingType", transacao.getTransacaoTipoFrete()); //VERIFICAR SE SUBIRÁ OK COMO 1 OU 2
-			map.add("shippingCost", transacao.getTransacaoValorFrete()); //VERIFICAR
+			map.add("shippingType", transacao.getOrderShippingType()); //VERIFICAR SE SUBIRÁ OK COMO 1 OU 2
+			map.add("shippingCost", transacao.getOrderShippingPrice()); //VERIFICAR
 			map.add("creditCardToken", transacao.getTransacaoCartaoToken()); //VERIFICAR SE SUBIRÁ OK
-			map.add("installmentQuantity", transacao.getTransacaoQuantidadeParcelas()); //VERIFICAR SE SUBIRÁ OK
-			map.add("installmentValue", transacao.getTransacaoValorParcela()); //VERIFICAR SE SUBIRÁ OK
+			map.add("installmentQuantity", transacao.getOrderPaymentAmounts()); //VERIFICAR SE SUBIRÁ OK
+			map.add("installmentValue", transacao.getOrderPaymentPrinceAmount()); //VERIFICAR SE SUBIRÁ OK
 			map.add("noInterestInstallmentQuantity", noInterestInstallmentQuantity); //VERIFICAR SE SUBIRÁ OK
 			map.add("creditCardHolderName", transacao.getTransacaoCartaoNome()); //VERIFICAR
 			map.add("creditCardHolderCPF", transacao.getTransacaoCartaoCPF());  //VERIFICAR

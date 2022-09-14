@@ -59,6 +59,7 @@ import br.com.dpaulla.service.CompraService;
 import br.com.dpaulla.service.SecurityService;
 import br.com.dpaulla.service.TransacaoService;
 import br.com.dpaulla.service.UserService;
+import br.com.dpaulla.service.admin.ProdutoService;
 
 @Configuration
 @Controller
@@ -440,12 +441,14 @@ public class MainController {
 			transacaoSession.setTransacaoEntregaEndereco(user.getLogradouro());
 			transacaoSession.setTransacaoEntregaEstado(user.getEstado());//NECESSÁRIO ADICIONAR ESTADO NO CADASTRO
 			transacaoSession.setTransacaoEntregaNumero(user.getLogradouronumero());
-			transacaoSession.setTransacaoValorFrete(freteCorreiosGet.getValor());
-			transacaoSession.setTransacaoTipoFrete(freteCorreiosGet.getCodigoDePara());
-			transacaoSession.setTransacaoValorSubTotal(String.valueOf(somaValorSubTotal));
-			transacaoSession.setTransacaoValorTotal(String.valueOf(valorTotal));
+			transacaoSession.setOrderShippingPrice(freteCorreiosGet.getValor());
+			transacaoSession.setOrderShippingType(freteCorreiosGet.getCodigoDePara());
+			transacaoSession.setOrderSubtotalPrice(String.valueOf(somaValorSubTotal));
+			transacaoSession.setOrderTotalPrice(String.valueOf(valorTotal));
 			request.getSession().setAttribute("SESSION_TRANSACAO", transacaoSession);
+		
 		}
+		
 		
 		model.put("quantidadeProduto", getQuantidadeProdutoMeuCarrinho(request));
 		
@@ -514,18 +517,19 @@ public class MainController {
 			transacaoToSession.setTransacaoEntregaEnderecoComplemento(user.getComplemento());
 			transacaoToSession.setTransacaoEntregaEstado(user.getEstado());
 			transacaoToSession.setTransacaoEntregaNumero(user.getLogradouronumero());
-			transacaoToSession.setTransacaoFormaPagamento("");
-			transacaoToSession.setTransacaoHashCode("");
+			transacaoToSession.setOrderPaymentType("");
+			transacaoToSession.setHashCode("");
 			transacaoToSession.setTransacaoBoletoLink("");
-			transacaoToSession.setTransacaoQuantidadeParcelas("");
-			transacaoToSession.setTransacaoDataGeracao(utilFeatures.dateTimeNow());
+			transacaoToSession.setOrderPaymentAmounts("");
+			transacaoToSession.setOrderDate(utilFeatures.dateTimeNow());
+			String t = transacaoToSession.getOrderSubtotalPrice();
 			transacaoToSession.setTransacaoBoletoDataGeracao("");
-			transacaoToSession.setTransacaoDataPagamento("");
-			transacaoToSession.setTransacaoStatus("Aguardando");
-			transacaoToSession.setTransacaoUsuarioId(user.getUserId());
-			transacaoToSession.setTransacaoValorFrete(transacaoSession.getTransacaoValorFrete());
-			transacaoToSession.setTransacaoValorSubTotal(transacaoSession.getTransacaoValorSubTotal());
-			transacaoToSession.setTransacaoValorTotal(transacaoSession.getTransacaoValorTotal());
+			transacaoToSession.setOrderPaymantDate("");
+			transacaoToSession.setOrderStatus("Aguardando");
+			transacaoToSession.setUserId(user.getUserId());
+			transacaoToSession.setOrderShippingPrice(transacaoSession.getOrderShippingPrice());
+			transacaoToSession.setOrderSubtotalPrice(transacaoSession.getOrderSubtotalPrice());
+			transacaoToSession.setOrderTotalPrice(transacaoSession.getOrderTotalPrice());
 			request.getSession().setAttribute("SESSION_TRANSACAO", transacaoToSession);
 			
 			model.put("sessao", tokenSession);
@@ -548,8 +552,8 @@ public class MainController {
 			throws ParseException, IOException, ParserConfigurationException, SAXException, InterruptedException, ExecutionException, TransformerConfigurationException {
 		log.info("enter on /checkout: {}", transacao);
 		log.info("enter on /checkout Token Card: {}", transacao.getTransacaoCartaoToken());
-		log.info("enter on /checkout Quantidade: {}", transacao.getTransacaoQuantidadeParcelas());
-		log.info("enter on /checkout Valor: {}", transacao.getTransacaoValorParcela());		
+		log.info("enter on /checkout Quantidade: {}", transacao.getOrderPaymentAmounts());
+		log.info("enter on /checkout Valor: {}", transacao.getOrderPaymentPrinceAmount());		
 		
 		order transacaoSession = (order) request.getSession().getAttribute("SESSION_TRANSACAO");
 		Util util = new Util();
@@ -558,15 +562,15 @@ public class MainController {
 			User user = securityService.findUserLogged();
 			List<OrdersBuy> comprasListSession = (List<OrdersBuy>) request.getSession().getAttribute("SESSION_COMPRAS");
 			
-			String formaPagamento = transacao.getTransacaoFormaPagamento();
+			String formaPagamento = transacao.getOrderPaymentType();
 			String dadosPortadorIguaisComprador = transacao.getTransacaoDadosPortadorIguaisComprador();
 			String dadosCobrancaIguaisEntrega = transacao.getTransacaoDadosCobrancaIguaisEntrega();
 			
 			log.info("dadosPortadorIguaisComprador {}", dadosPortadorIguaisComprador);
 			log.info("dadosCobrancaIguaisEntrega {}", dadosCobrancaIguaisEntrega);
 			//AQUI DEVE VERIFICAR QUAL É A FORMA DE PAGAMENTO, 1 BOLETO, 2 CARTAO DE CREDITO VISA E 3 CARTAO DE CREDITO MASTER.
-			transacaoSession.setTransacaoFormaPagamento(formaPagamento);
-			transacaoSession.setTransacaoHashCode(transacao.getTransacaoHashCode());			
+			transacaoSession.setOrderPaymentType(formaPagamento);
+			transacaoSession.setHashCode(transacao.getHashCode());			
 			
 			if(formaPagamento.equals(formaPagamentoBoleto)) {
 				transacaoSession.setTransacaoBoletoTelefone(util.returnTelefone(transacao.getTransacaoBoletoTelefone()));
@@ -574,8 +578,8 @@ public class MainController {
 				transacaoSession.setTransacaoBoletoCPF(util.tratarCPF(transacao.getTransacaoBoletoCPF()));
 			}else if(formaPagamento.equals(formaPagamentoCartaoVisa)) {
 				transacaoSession.setTransacaoCartaoToken(transacao.getTransacaoCartaoToken());
-				transacaoSession.setTransacaoQuantidadeParcelas(transacao.getTransacaoQuantidadeParcelas());
-				transacaoSession.setTransacaoValorParcela(util.convertValue(transacao.getTransacaoValorParcela()));
+				transacaoSession.setOrderPaymentAmounts(transacao.getOrderPaymentAmounts());
+				transacaoSession.setOrderPaymentPrinceAmount(util.convertValue(transacao.getOrderPaymentPrinceAmount()));
 				
 				if (dadosPortadorIguaisComprador.equals("false")) {
 					log.info("DEVE PREENCHER OS CAMPOS COM AS INFORMAÇÕES QUE SOBEM DO JSP");
@@ -604,7 +608,7 @@ public class MainController {
 				request.getSession().setAttribute("SESSION_TRANSACAO", transacaoTemp);
 			}
 
-			int transacaoId = transacaoTemp.getTransacaoId();
+			int transacaoId = transacaoTemp.getId();
 
 			//FLUXO PERFEITO - BOLETO
 			if(formaPagamento.equals(formaPagamentoBoleto)) {
@@ -642,8 +646,8 @@ public class MainController {
 
 				transacaoTemp.setTransacaoBoletoLink(paymentLink);
 				transacaoTemp.setTransacaoBoletoDataGeracao(date);
-				transacaoTemp.setTransacaoDataPagamento(lastEventDate);
-				transacaoTemp.setTransacaoCodigo(code);
+				transacaoTemp.setOrderPaymantDate(lastEventDate);
+				transacaoTemp.setOrderId(code);
 
 				order teste = transacaoService.saveAndReturn(transacaoTemp);
 				log.info("TransacaoSalva após receber o retorno do boleto com o Link etc... {}", teste);

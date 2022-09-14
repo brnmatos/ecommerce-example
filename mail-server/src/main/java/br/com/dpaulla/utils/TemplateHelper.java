@@ -14,11 +14,13 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class TemplateHelper {
+	
+	private static Logger log = LoggerFactory.getLogger(TemplateHelper.class);
+	
 	private VelocityEngine ve;
 	private VelocityContext context;
 	private Template template;
