@@ -21,7 +21,7 @@ import lombok.ToString;
 public @Data class Marca {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="marcaId")
 	private int marcaId;
 		

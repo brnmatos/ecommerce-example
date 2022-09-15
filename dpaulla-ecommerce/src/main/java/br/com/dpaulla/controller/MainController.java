@@ -59,7 +59,6 @@ import br.com.dpaulla.service.CompraService;
 import br.com.dpaulla.service.SecurityService;
 import br.com.dpaulla.service.TransacaoService;
 import br.com.dpaulla.service.UserService;
-import br.com.dpaulla.service.admin.ProdutoService;
 
 @Configuration
 @Controller
@@ -568,11 +567,14 @@ public class MainController {
 			
 			log.info("dadosPortadorIguaisComprador {}", dadosPortadorIguaisComprador);
 			log.info("dadosCobrancaIguaisEntrega {}", dadosCobrancaIguaisEntrega);
+			log.info("formaPagamento {}", formaPagamento);
+
 			//AQUI DEVE VERIFICAR QUAL É A FORMA DE PAGAMENTO, 1 BOLETO, 2 CARTAO DE CREDITO VISA E 3 CARTAO DE CREDITO MASTER.
 			transacaoSession.setOrderPaymentType(formaPagamento);
 			transacaoSession.setHashCode(transacao.getHashCode());			
 			
 			if(formaPagamento.equals(formaPagamentoBoleto)) {
+				log.info("PRIMEIRO IF");
 				transacaoSession.setTransacaoBoletoTelefone(util.returnTelefone(transacao.getTransacaoBoletoTelefone()));
 				transacaoSession.setTransacaoBoletoTelefoneDDD(util.returnDDD(transacao.getTransacaoBoletoTelefone()));
 				transacaoSession.setTransacaoBoletoCPF(util.tratarCPF(transacao.getTransacaoBoletoCPF()));

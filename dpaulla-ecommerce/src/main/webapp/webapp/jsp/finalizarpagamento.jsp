@@ -21,7 +21,7 @@
 <title>Finalizar Pagamento</title>
 
 </head>
-<body onload="getPaymentMethodsDPaulla('${sessao}', '${transacaoSession.transacaoValorTotal}');calculaValorReais();" class="body-left">
+<body onload="getPaymentMethodsDPaulla('${sessao}', '${transacaoSession.orderTotalPrice}');calculaValorReais();" class="body-left">
 	<div class="section-body">
 		<div class="section-menu-principal-view">
 			<div class="section-menu-principal-view-logo">
@@ -137,7 +137,7 @@
 						<div class="section-finalizarpagamento-view-pagamento-radio-credito" id="finalizarpagamento-radio-credito">
 							<div class="textbox-label section-finalizarpagamento-view-pagamento-radio-credito-cartaocredito">
 								<label>Número do cartão</label> 
-								<input type="text" id="textCartaoCredito" name="transacaoCartaoNumero" onblur="getInstallments('${transacaoSession.transacaoValorTotal}',this.value)" onkeyup="getBandeiraCartao(this.value);"  onblur="getBandeiraCartao(this.value);" onkeypress="$(this).mask('0000.0000.0000.0000')" placeholder="0000.0000.0000.0000">
+								<input type="text" id="textCartaoCredito" name="transacaoCartaoNumero" onblur="getInstallments('${transacaoSession.orderTotalPrice}',this.value)" onkeyup="getBandeiraCartao(this.value);"  onblur="getBandeiraCartao(this.value);" onkeypress="$(this).mask('0000.0000.0000.0000')" placeholder="0000.0000.0000.0000">
 							</div>
 							<div class="section-finalizarpagamento-view-pagamento-radio-credito-cartaocredito-imagem" id="section-finalizarpagamento-view-pagamento-radio-credito-cartaocredito-imagem"> 
 								<img src="assets/images/cartao-credito.png" alt="creditCard" class="section-finalizarpagamento-view-pagamento-radio-credito-cartaocredito-imagem-card" id="section-finalizarpagamento-view-pagamento-radio-credito-cartaocredito-imagem-card"></img>
@@ -313,13 +313,13 @@
 <script>
 
 function calculaValorReais(){
-	var subtotalvalor = ${transacaoSession.transacaoValorSubTotal};
+	var subtotalvalor = ${transacaoSession.orderSubtotalPrice};
 	var valorconvertido = subtotalvalor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 	document.getElementById("section-finalizarpagamento-view-resumo-produtos-subtotal-valor").innerHTML = valorconvertido;
-	var fretevalor = ${transacaoSession.transacaoValorFrete};
+	var fretevalor = ${transacaoSession.orderShippingPrice};
 	valorconvertido = fretevalor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 	document.getElementById("section-finalizarpagamento-view-resumo-produtos-frete-valor").innerHTML = valorconvertido;
-	var totalvalor = ${transacaoSession.transacaoValorTotal};
+	var totalvalor = ${transacaoSession.orderTotalPrice};
 	valorconvertido = totalvalor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
 	document.getElementById("section-finalizarpagamento-view-resumo-produtos-total-valor").innerHTML = valorconvertido;
 	

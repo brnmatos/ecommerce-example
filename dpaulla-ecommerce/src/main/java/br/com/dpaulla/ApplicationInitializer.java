@@ -1,20 +1,19 @@
 package br.com.dpaulla;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
-
 import br.com.dpaulla.model.Role;
 import br.com.dpaulla.model.User;
+import br.com.dpaulla.model.examples.BrandsExample;
+import br.com.dpaulla.model.examples.ImagesExample;
+import br.com.dpaulla.model.examples.ProductsExample;
 import br.com.dpaulla.model.examples.UsersExample;
 import br.com.dpaulla.service.UserService;
+import br.com.dpaulla.service.admin.ImageService;
+import br.com.dpaulla.service.admin.MarcaService;
 import br.com.dpaulla.service.admin.ProdutoService;
 import br.com.dpaulla.service.admin.RoleService;
 
@@ -22,14 +21,22 @@ import br.com.dpaulla.service.admin.RoleService;
 public class ApplicationInitializer implements ServletContextInitializer{
 	
 	@Autowired
-	ProdutoService produtoService;
-	
-	@Autowired
 	UserService userService;
 	
 	@Autowired
 	RoleService roleService;
 
+	@Autowired
+	MarcaService marcaService;
+	
+	@Autowired
+	ProdutoService produtoService;
+	
+	@Autowired
+	ImageService imageService;
+	
+	
+	
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		
@@ -40,11 +47,18 @@ public class ApplicationInitializer implements ServletContextInitializer{
 		if (userService.checkEmpty()) {
 			userStart(userService);
 		}
+		
+		if (marcaService.checkEmpty()) {
+			brandStart(marcaService);
+		}
 
 		if (produtoService.checkEmpty()) {
-			produtoStart(produtoService);
+			productStart(produtoService);
 		}
 		
+		if (imageService.checkEmpty()) {
+			imageStart(imageService);
+		}
 		
 	}
 	
@@ -70,8 +84,34 @@ public class ApplicationInitializer implements ServletContextInitializer{
 		
 	}
 	
-	private void produtoStart(ProdutoService produtoService) {
-		
+	private void brandStart(MarcaService marcaService) {
+		BrandsExample brandExample = new BrandsExample();
+		marcaService.save(brandExample.firstBrand());
+		marcaService.save(brandExample.secondBrand());
+		marcaService.save(brandExample.thirdBrand());
+		marcaService.save(brandExample.fourthBrand());
+	}
+	
+	private void productStart(ProdutoService produtoService) {
+		ProductsExample productExample = new ProductsExample();
+		produtoService.save(productExample.firstProduct());
+		produtoService.save(productExample.secondProduct());
+		produtoService.save(productExample.thirdProduct());
+		produtoService.save(productExample.fourthProduct());
+		produtoService.save(productExample.fifthProduct());
+		produtoService.save(productExample.sixthProduct());
+	}
+	
+	private void imageStart(ImageService imageService) {
+		ImagesExample imageExample = new ImagesExample();
+		imageService.save(imageExample.firstImage());
+		imageService.save(imageExample.secondImage());
+		imageService.save(imageExample.thirdImage());
+		imageService.save(imageExample.fourthImage());
+		imageService.save(imageExample.fifthImage());
+		imageService.save(imageExample.sixthImage());
+		imageService.save(imageExample.seventhImage());
+		imageService.save(imageExample.eighthImage());
 	}
 	
 

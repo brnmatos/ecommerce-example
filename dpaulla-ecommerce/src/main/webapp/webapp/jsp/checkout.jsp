@@ -113,7 +113,7 @@
 		</div>
 	<div class="section-checkout">
 		<div class="section-checkout-view">
-			<h4>O número do seu pedido é: ${transacaoSession.transacaoId}</h4>
+			<h4>O número do seu pedido é: ${transacaoSession.orderId}</h4>
 			<text>Em breve você receberá um email com a confirmação do pedido.</text>
 			<a class="icone-legenda" href="/marcas">CONTINUE COMPRANDO</a>
 			<button type="submit" class="btn-dpaulla" name="name" onclick="imprimirBoleto()">IMPRIMIR BOLETO</button>

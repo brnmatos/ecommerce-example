@@ -21,7 +21,7 @@ import lombok.ToString;
 public @Data class Produto{
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="produtoId")
 	private int produtoId;
 		
